@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Account</title>
+    <link rel="icon" href="../static/assets/logo.png" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <style type="text/css">
+        body, html {
+            height: 100%;
+            margin: 0;
+            font-size: 16px;
+            font-family: "Lato", sans-serif;
+            font-weight: 400;
+            line-height: 1.8em;
+            color: #666;
+        }
+        .form-container {
+            width: 300px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f2f2f2;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .form-title {
+            text-align: center;
+            font-size: 24px;
+            margin-bottom: 20px;
+        }
+        .form-input {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        .btn {
+            width: 100%;
+            padding: 10px;
+            background-color: #1c364f;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        }
+        .btn:hover {
+            background-color: #143241;
+        }
+        .flash-messages {
+            width: 300px;
+            margin: 20px auto;
+            padding: 10px;
+            border-radius: 5px;
+            text-align: center;
+        }
+        .flash-success {
+            background-color: #dff0d8;
+            color: #3c763d;
+        }
+        .flash-error {
+            background-color: #f2dede;
+            color: #a94442;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Flash Messages -->
+    {% with messages = get_flashed_messages(with_categories=true) %}
+        {% if messages %}
+            {% for category, message in messages %}
+                <div class="flash-messages flash-{{ category }}">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endif %}
+    {% endwith %}
+
+    <!-- Sign Up Form -->
+    <div id="signup" class="form-container">
+        <div class="form-title">Sign Up</div>
+        <form action="{{ url_for('signup') }}" method="post">
+            <input type="email" name="email" placeholder="Email" class="form-input" required>
+            <input type="password" name="password" placeholder="Password" class="form-input" required>
+            <button type="submit" class="btn">Sign Up</button>
+        </form>
+    </div>
+
+    <!-- Login Form -->
+    <div id="login" class="form-container">
+        <div class="form-title">Login</div>
+        <form action="{{ url_for('login') }}" method="post">
+            <input type="email" name="email" placeholder="Email" class="form-input" required>
+            <input type="password" name="password" placeholder="Password" class="form-input" required>
+            <button type="submit" class="btn">Login</button>
+        </form>
+    </div>
+
+</body>
+</html>
